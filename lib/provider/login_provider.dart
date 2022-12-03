@@ -4,17 +4,23 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
+import 'package:login_design/constant/const.dart';
+import 'package:login_design/models/user_model.dart';
+
 class LoginProvider extends ChangeNotifier {
+
+  UserModel? userModel;
 
   login({required String email , required String pass }) async {
     try {
-      http.Response response = await http.post(Uri.parse('https://student.valuxapps.com/api/login'),
+      http.Response response = await http.post(Uri.parse('${PASE_URL}/login'),
       body: {
         "email" : email,
         "password" : pass
       }
       );
       if(response.statusCode==200){
+       UserModel userModel = UserModel.fromJson(json: json.decode(response.body)['data'] );
         print(json.decode(response.body));
         notifyListeners();
       }
@@ -25,9 +31,10 @@ class LoginProvider extends ChangeNotifier {
       print(e.toString());
     }
   }
+
   signup()async {
     try {
-      http.Response response = await http.post(Uri.parse('https://student.valuxapps.com/api/register'),
+      http.Response response = await http.post(Uri.parse('${PASE_URL}/register'),
           body: {
             "name" : "abdelrahman ayman",
             "phone" : "01023982",

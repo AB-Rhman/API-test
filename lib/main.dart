@@ -3,6 +3,8 @@ import 'package:login_design/loginScreen.dart';
 import 'package:login_design/provider/login_provider.dart';
 import 'package:provider/provider.dart';
 
+import 'constant/splash_screen.dart';
+
 void main() {
   runApp(ChangeNotifierProvider(
       create: ( ctx) {
@@ -15,7 +17,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: LoginScreen(),
+      home: SplashScareen(),
       
     );
   }
